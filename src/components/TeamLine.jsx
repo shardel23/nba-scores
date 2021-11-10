@@ -15,8 +15,19 @@ export default function TeamLine({
   bold,
 }: Props) {
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "10%" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        fontWeight: showScores && bold ? "bold" : "normal",
+        marginBottom: "8px",
+      }}
+    >
+      <div
+        style={{
+          width: "20%",
+        }}
+      >
         <img
           src={getTeamIcon(teamName)}
           alt="logo"
@@ -26,13 +37,18 @@ export default function TeamLine({
       </div>
       <div
         style={{
-          display: "flex",
-          width: "90%",
-          justifyContent: "space-between",
-          fontWeight: showScores && bold ? "bold" : "normal",
+          width: "60%",
         }}
       >
         <Card.Text>{teamName}</Card.Text>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "right",
+          width: "20%",
+        }}
+      >
         <Card.Text>{!showScores ? "" : teamScore}</Card.Text>
       </div>
     </div>

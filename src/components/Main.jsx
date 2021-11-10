@@ -3,6 +3,7 @@ import GameCard from "./GameCard";
 import MySpinner from "./Spinner";
 import Header from "./Header";
 import { addDays, subDays } from "date-fns";
+import { makeStyles, Grid } from "@material-ui/core";
 
 import { GAMES_URL } from "../paths";
 import { formatDate, getMatchTimestamp } from "../utils";
@@ -65,14 +66,18 @@ export default function Main() {
       />
       <div
         style={{
-          margin: "24px 10% 0 10%",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          margin: "24px 8px 0 8px",
         }}
       >
-        {sortedData.map((game) => {
-          return <GameCard key={game.id} gameDetails={game} date={date} />;
-        })}
+        <Grid container>
+          {sortedData.map((game) => {
+            return (
+              <Grid item xs={12} md={6}>
+                <GameCard key={game.id} gameDetails={game} date={date} />
+              </Grid>
+            );
+          })}
+        </Grid>
       </div>
     </>
   );
