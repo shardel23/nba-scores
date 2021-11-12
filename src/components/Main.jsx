@@ -3,7 +3,7 @@ import GameCard from "./GameCard";
 import MySpinner from "./Spinner";
 import Header from "./Header";
 import { addDays, subDays } from "date-fns";
-import { makeStyles, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import { GAMES_URL } from "../paths";
 import { formatDate, getMatchTimestamp } from "../utils";

@@ -1,3 +1,5 @@
+import { Winner } from "./types";
+
 const INTEREST_DIFF = 5;
 const LIVE_GAME_STATUS_OPTIONS = [
   "1st Qtr",
@@ -64,19 +66,14 @@ export function isInterestingGame(
   return false;
 }
 
-/**
- * 0 - No winner
- * 1 - Home team won
- * -1 - Away team won
- */
 export function getWinner(status, homeTeamScore, awayTeamScore) {
   if (status !== "Final") {
-    return 0;
+    return Winner.NONE;
   }
   if (homeTeamScore > awayTeamScore) {
-    return 1;
+    return Winner.HOME;
   }
-  return -1;
+  return Winner.VISITOR;
 }
 
 export function isLiveGame(status) {
