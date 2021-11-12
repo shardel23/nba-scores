@@ -1,5 +1,5 @@
 import Card from "react-bootstrap/Card";
-import TeamLine from "./TeamLine";
+import { getTeamIcon } from "../logos";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
@@ -62,56 +62,120 @@ export default function GameCard({ gameDetails, date }: Props) {
   return (
     <Card>
       <Card.Body>
-        <div
+        <div // Entire Card
           style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
           }}
         >
-          <div
+          <div // Left Side
             style={{
               display: "flex",
               width: "65%",
+              justifyContent: "space-between",
             }}
           >
-            <div
+            <div // Icons
               style={{
                 display: "flex",
-                width: "100%",
+                justifyContent: "space-between",
                 flexDirection: "column",
+                width: "20%",
+                height: "64px",
               }}
             >
-              <TeamLine
-                teamName={gameDetails.visitor_team.name}
-                teamScore={gameDetails.visitor_team_score}
-                showScores={showScores}
-                bold={winner === -1}
+              <img
+                src={getTeamIcon(gameDetails.visitor_team.name)}
+                alt="logo"
+                width="25px"
+                height="25px"
               />
-              <TeamLine
-                teamName={gameDetails.home_team.name}
-                teamScore={gameDetails.home_team_score}
-                showScores={showScores}
-                bold={winner === 1}
+              <img
+                src={getTeamIcon(gameDetails.home_team.name)}
+                alt="logo"
+                width="25px"
+                height="25px"
               />
             </div>
-            {!showScores && (
+            <div // Team Names
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "60%",
+              }}
+            >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  cursor: "pointer",
+                  fontWeight: showScores && winner === -1 ? "bold" : "normal",
                 }}
               >
-                <VisibilityIcon
-                  onClick={() => {
-                    setShowScores(true);
+                <Card.Text>{gameDetails.visitor_team.name}</Card.Text>
+              </div>
+              <div
+                style={{
+                  fontWeight: showScores && winner === 1 ? "bold" : "normal",
+                }}
+              >
+                <Card.Text>{gameDetails.home_team.name}</Card.Text>
+              </div>
+            </div>
+            {showScores ? (
+              <div // Scores
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  width: "20%",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "right",
+                    fontWeight: winner === -1 ? "bold" : "normal",
                   }}
-                />
+                >
+                  <Card.Text>{gameDetails.visitor_team_score}</Card.Text>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "right",
+                    fontWeight: winner === 1 ? "bold" : "normal",
+                  }}
+                >
+                  <Card.Text>{gameDetails.home_team_score}</Card.Text>
+                </div>
+              </div>
+            ) : (
+              <div // Eye Icon
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-end",
+                  width: "20%",
+                }}
+              >
+                <div // Cursor
+                  style={{
+                    display: "flex",
+                    justifyContent: "right",
+                    cursor: "pointer",
+                  }}
+                >
+                  <VisibilityIcon
+                    onClick={() => {
+                      setShowScores(true);
+                    }}
+                  />
+                </div>
               </div>
             )}
           </div>
-          <div
+          <div // Right Side
             style={{
               display: "flex",
               width: "30%",
